@@ -6,40 +6,42 @@ A Stackoverflow Clone using Next.js
 
 - The Context API in React provides a way to pass data through the component tree without having to pass props down manually at every level. This is particularly useful for data that should be globally available throughout your application like theme or user data.
 
-  1. Create a context
+- The Provider should use 'use client' at the top in Next.js. So that we can use the client side hooks in the server components.
 
-  ```
-     import react, {createContext, useState} from 'react';
+1. Create a context
 
-     export const UserContext = createContext(null);
+```
+   import react, {createContext, useState} from 'react';
 
-  ```
+   export const UserContext = createContext(null);
 
-  2. Provide the Context Value
+```
 
-  ```
-    export function UserContextProvider({children}) {
-      const [user, setUser] = useState(null);
+2. Provide the Context Value
 
-      return (
-        <UserContext.Provider value={{user, setUser}}>
-          {children}
-        </UserContext.Provider>
-      );
-    }
-  ```
+```
+  export function UserContextProvider({children}) {
+    const [user, setUser] = useState(null);
 
-  3. Consume the Context Value
+    return (
+      <UserContext.Provider value={{user, setUser}}>
+        {children}
+      </UserContext.Provider>
+    );
+  }
+```
 
-  ```
-    import React, { useContext } from 'react';
-    import { MyContext } from './MyContext';
+3. Consume the Context Value
 
-    function MyComponent() {
-        const { value } = useContext(MyContext);
+```
+  import React, { useContext } from 'react';
+  import { MyContext } from './MyContext';
 
-        return <div>{value}</div>;
-    }
+  function MyComponent() {
+      const { value } = useContext(MyContext);
 
-    export default MyComponent;
-  ```
+      return <div>{value}</div>;
+  }
+
+  export default MyComponent;
+```
