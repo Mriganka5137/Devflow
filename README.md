@@ -1,47 +1,34 @@
-# Devflow
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-A Stackoverflow Clone using Next.js
+## Getting Started
 
-## Context API in Next.js
+First, run the development server:
 
-- The Context API in React provides a way to pass data through the component tree without having to pass props down manually at every level. This is particularly useful for data that should be globally available throughout your application like theme or user data.
-
-- The Provider should use 'use client' at the top in Next.js. So that we can use the client side hooks in the server components.
-
-1. Create a context
-
-```
-   import react, {createContext, useState} from 'react';
-
-   export const UserContext = createContext(null);
-
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
 ```
 
-2. Provide the Context Value
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```
-  export function UserContextProvider({children}) {
-    const [user, setUser] = useState(null);
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-    return (
-      <UserContext.Provider value={{user, setUser}}>
-        {children}
-      </UserContext.Provider>
-    );
-  }
-```
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-3. Consume the Context Value
+## Learn More
 
-```
-  import React, { useContext } from 'react';
-  import { MyContext } from './MyContext';
+To learn more about Next.js, take a look at the following resources:
 
-  function MyComponent() {
-      const { value } = useContext(MyContext);
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-      return <div>{value}</div>;
-  }
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-  export default MyComponent;
-```
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
