@@ -1,4 +1,5 @@
 import HomeFilters from "@/components/home/HomeFilters";
+import QuestionCard from "@/components/home/QuestionCard";
 import Filter from "@/components/shared/Filter";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
@@ -29,8 +30,13 @@ export default function Home() {
           otherClasses="min-h-[56px] sm:min-w-[170px]"
           containerClasses="hidden max-md:flex"
         />
+        <HomeFilters />
       </div>
-      <HomeFilters />
+      <div className="mt-10 flex w-full flex-col gap-6 ">
+        <QuestionCard />
+        <QuestionCard />
+        <QuestionCard />
+      </div>
     </>
   );
 }
