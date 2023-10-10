@@ -60,50 +60,50 @@ import React from "react";
 import RenderTag from "./RenderTag";
 const hotQuestions = [
   {
-    _id: 1,
+    _id: "1",
     title: "How to use React Router Dom?",
   },
   {
-    _id: 2,
+    _id: "2",
     title: "Cascading Deletes in SQLAlchemy",
   },
   {
-    _id: 3,
+    _id: "3",
     title: "How to use React Router Dom?",
   },
   {
-    _id: 4,
+    _id: "4",
     title: "How to use React Router Dom?",
   },
   {
-    _id: 5,
+    _id: "5",
     title: "How to use React Router Dom?",
   },
 ];
 
 const popularTags = [
   {
-    _id: 1,
+    _id: "1",
     name: "React",
     totalQuestions: 15,
   },
   {
-    _id: 2,
+    _id: "2",
     name: "JavaScript",
     totalQuestions: 5,
   },
   {
-    _id: 3,
+    _id: "3",
     name: "Next.JS",
     totalQuestions: 10,
   },
   {
-    _id: 4,
+    _id: "4",
     name: "Node.Js",
     totalQuestions: 13,
   },
   {
-    _id: 5,
+    _id: "5",
     name: "Tailwind",
     totalQuestions: 7,
   },
