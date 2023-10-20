@@ -5,30 +5,55 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const getTimeStamp = (createdAt: Date): string => {
+export const getTimestamp = (createdAt: Date): string => {
   const now = new Date();
-  const seconds = Math.floor((now.getTime() - createdAt.getTime()) / 1000);
-  const minutes = Math.floor(seconds / 60);
-  const hours = Math.floor(minutes / 60);
-  const days = Math.floor(hours / 24);
-  const months = Math.floor(days / 30);
-  const years = Math.floor(days / 365);
+  const timeDifference = now.getTime() - createdAt.getTime();
 
-  if (years > 0) return years === 1 ? "a year ago" : `${years} years ago`;
-  if (months > 0) return months === 1 ? "a month ago" : `${months} months ago`;
-  if (days > 0) return days === 1 ? "a day ago" : `${days} days ago`;
-  if (hours > 0) return hours === 1 ? "an hour ago" : `${hours} hours ago`;
-  if (minutes > 0)
-    return minutes === 1 ? "a minute ago" : `${minutes} minutes ago`;
-  return "just now";
+  // Define time intervals in milliseconds
+  const minute = 60 * 1000;
+  const hour = 60 * minute;
+  const day = 24 * hour;
+  const week = 7 * day;
+  const month = 30 * day;
+  const year = 365 * day;
+
+  if (timeDifference < minute) {
+    const seconds = Math.floor(timeDifference / 1000);
+    return `${seconds} ${seconds === 1 ? "second" : "seconds"} ago`;
+  } else if (timeDifference < hour) {
+    const minutes = Math.floor(timeDifference / minute);
+    return `${minutes} ${minutes === 1 ? "minute" : "minutes"} ago`;
+  } else if (timeDifference < day) {
+    const hours = Math.floor(timeDifference / hour);
+    return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
+  } else if (timeDifference < week) {
+    const days = Math.floor(timeDifference / day);
+    return `${days} ${days === 1 ? "day" : "days"} ago`;
+  } else if (timeDifference < month) {
+    const weeks = Math.floor(timeDifference / week);
+    return `${weeks} ${weeks === 1 ? "week" : "weeks"} ago`;
+  } else if (timeDifference < year) {
+    const months = Math.floor(timeDifference / month);
+    return `${months} ${months === 1 ? "month" : "months"} ago`;
+  } else {
+    const years = Math.floor(timeDifference / year);
+    return `${years} ${years === 1 ? "year" : "years"} ago`;
+  }
 };
 
-export const formatNumber = (num: number): string => {
+export const formatAndDivideNumber = (num: number): string => {
   if (num >= 1000000) {
-    return (num / 1000000).toFixed(1).replace(/\.0$/, "") + "M";
+    const formattedNum = (num / 1000000).toFixed(1);
+    return `${formattedNum}M`;
+  } else if (num >= 1000) {
+    const formattedNum = (num / 1000).toFixed(1);
+    return `${formattedNum}K`;
+  } else {
+    if (num !== undefined && num !== null) {
+      return num.toString();
+    } else {
+      // Handle the case when num is undefined or null
+      return "N/A"; // or any other appropriate value or error handling strategy
+    }
   }
-  if (num >= 1000) {
-    return (num / 1000).toFixed(1).replace(/\.0$/, "") + "K";
-  }
-  return num.toString();
 };
