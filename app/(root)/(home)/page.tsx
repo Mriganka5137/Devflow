@@ -10,7 +10,15 @@ import { getQuestions } from "@/lib/actions/question.action";
 
 export default async function Home() {
   // Get the Questions from DB
-  const result = await getQuestions({});
+  let result;
+
+  try {
+    // Get the Questions from DB
+    result = await getQuestions({});
+  } catch (error) {
+    // Handle any errors that occur during the data fetching
+    console.error("Error fetching questions:", error);
+  }
 
   return (
     <>
@@ -42,8 +50,8 @@ export default async function Home() {
 
       {/* QUESTION CARD */}
       <div className="mt-10 flex w-full flex-col gap-6 ">
-        {result!.questions.length > 0 ? (
-          result!.questions.map((question) => {
+        {result && result.questions && result.questions.length > 0 ? (
+          result.questions.map((question) => {
             return (
               <QuestionCard
                 _id={question._id}
