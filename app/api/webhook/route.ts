@@ -52,6 +52,7 @@ export async function POST(req: Request) {
   }
 
   const eventType = evt.type;
+  console.log(eventType);
 
   //   Create User webhook
   if (eventType === "user.created") {
