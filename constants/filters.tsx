@@ -32,6 +32,11 @@ export const HomePageFilters = [
   { name: "Frequent", value: "frequent" },
   { name: "Unanswered", value: "unanswered" },
 ];
+export const CommunityFilters = [
+  { name: "Popular", value: "popular" },
+  { name: "Highest Reputation", value: "highest_reputation" },
+  { name: "Moderators", value: "moderators" },
+];
 
 export const GlobalSearchFilters = [
   { name: "Question", value: "question" },
