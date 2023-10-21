@@ -55,8 +55,8 @@ const QuestionCard = ({
         ))}
       </div>
 
-      {/*  */}
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
+        {/* AUTHOR PIC */}
         <Metric
           imgUrl={author.picture}
           alt="user"

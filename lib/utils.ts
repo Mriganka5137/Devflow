@@ -53,7 +53,7 @@ export const formatAndDivideNumber = (num: number): string => {
       return num.toString();
     } else {
       // Handle the case when num is undefined or null
-      return "N/A"; // or any other appropriate value or error handling strategy
+      return ""; // or any other appropriate value or error handling strategy
     }
   }
 };
