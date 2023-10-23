@@ -39,7 +39,7 @@ const QuestionCard = ({
           <span className="subtle-regular text-dark400_light700 line-clamp-1 flex sm:hidden">
             {getTimestamp(createdAt)}
           </span>
-          <Link href={`/questions/${_id}`}>
+          <Link href={`/question/${_id}`}>
             <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1 flex-1">
               {title}
             </h3>
@@ -55,10 +55,10 @@ const QuestionCard = ({
         ))}
       </div>
 
-      {/*  */}
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
+        {/* AUTHOR PIC */}
         <Metric
-          imgUrl="/assets/icons/avatar.svg"
+          imgUrl={author.picture}
           alt="user"
           value={author.name}
           title=" - asked 1 hour ago" // -----> TODO: Add time ago
