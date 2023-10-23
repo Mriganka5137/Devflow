@@ -5,6 +5,7 @@ import Image from "next/image";
 import Metric from "@/components/shared/Metric";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import ParseHTML from "@/components/shared/ParseHTML";
+import RenderTag from "@/components/shared/RenderTag";
 
 const Page = async ({ params, searchParams }) => {
   const result = await getQuestionByID({ questionId: params.id });
@@ -59,7 +60,16 @@ const Page = async ({ params, searchParams }) => {
       </div>
       <ParseHTML data={result.content} />
 
-      <div></div>
+      <div className="mt-8 flex flex-wrap gap-2">
+        {result.tags.map((tag: any) => (
+          <RenderTag
+            key={tag._id}
+            _id={tag._id}
+            name={tag.name}
+            showCount={false}
+          />
+        ))}
+      </div>
     </>
   );
 };
