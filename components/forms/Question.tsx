@@ -21,6 +21,7 @@ import { QuestionsSchema } from "@/lib/validations";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { createQuestions } from "@/lib/actions/question.action";
+import { useTheme } from "@/context/ThemeProvider";
 
 interface Props {
   mongoUserId: string;
@@ -33,6 +34,7 @@ const Question = ({ mongoUserId }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const path = usePathname();
+  const { mode } = useTheme();
 
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
@@ -188,6 +190,8 @@ const Question = ({ mongoUserId }: Props) => {
                       "alignright alignjustify | bullist numlist | " +
                       "removeformat | help",
                     content_style: "body { font-family:Inter; font-size:16px }",
+                    skin: mode === "dark" ? "oxide-dark" : "oxide",
+                    content_css: mode === "dark" ? "dark" : "light",
                   }}
                 />
               </FormControl>
