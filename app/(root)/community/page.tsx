@@ -31,7 +31,7 @@ const Community = async () => {
         ) : (
           <div className="paragraph-regular text-dark200_light800 mx-auto max-w-4xl text-center">
             <p className="mb-2">No users yet</p>
-            <Link href="/sign-up" className="font-bold text-accent-blue">
+            <Link href="/sign-up" className=" font-bold text-accent-blue">
               Join to be the first
             </Link>
           </div>
