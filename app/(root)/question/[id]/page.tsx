@@ -6,6 +6,7 @@ import Metric from "@/components/shared/Metric";
 import { formatAndDivideNumber, getTimestamp } from "@/lib/utils";
 import ParseHTML from "@/components/shared/ParseHTML";
 import RenderTag from "@/components/shared/RenderTag";
+import Answer from "@/components/forms/Answer";
 
 const Page = async ({ params, searchParams }) => {
   const result = await getQuestionByID({ questionId: params.id });
@@ -70,6 +71,8 @@ const Page = async ({ params, searchParams }) => {
           />
         ))}
       </div>
+
+      <Answer />
     </>
   );
 };
