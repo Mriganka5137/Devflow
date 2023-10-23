@@ -57,7 +57,9 @@ const Page = async ({ params, searchParams }) => {
           textStyles="small-medium text-dark400_light800"
         />
       </div>
-      <ParseHTML />
+      <ParseHTML data={result.content} />
+
+      <div></div>
     </>
   );
 };
