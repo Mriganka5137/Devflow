@@ -10,6 +10,7 @@ import Answer from "@/components/forms/Answer";
 import { auth } from "@clerk/nextjs";
 import { getUserById } from "@/lib/actions/user.action";
 import AllAnswers from "@/components/shared/AllAnswers";
+import Votes from "@/components/shared/Votes";
 
 const Page = async ({ params, searchParams }) => {
   const { userId: clerkId } = auth();
@@ -39,7 +40,9 @@ const Page = async ({ params, searchParams }) => {
               {result.author.name}
             </p>
           </Link>
-          <div className="flex justify-end"> VOTE</div>
+          <div className="flex justify-end">
+            <Votes />
+          </div>
         </div>
         <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
           {result.title}
