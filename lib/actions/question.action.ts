@@ -11,11 +11,13 @@ import {
 import User from "@/database/user.model";
 import { revalidatePath } from "next/cache";
 
+// Get all questions
 export async function getQuestions(params: GetQuestionsParams) {
   try {
     // Connect to DB
     connectToDatabase();
     const questions = await Question.find({})
+      .sort({ createdAt: -1 })
       .populate({
         path: "tags",
         model: Tag,
@@ -31,6 +33,7 @@ export async function getQuestions(params: GetQuestionsParams) {
   }
 }
 
+// Create Question Action
 export async function createQuestions(params: CreateQuestionParams) {
   try {
     // connect to DB
