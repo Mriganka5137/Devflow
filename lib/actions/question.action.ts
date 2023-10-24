@@ -33,6 +33,7 @@ export async function getQuestions(params: GetQuestionsParams) {
   }
 }
 
+// Create Question Action
 export async function createQuestions(params: CreateQuestionParams) {
   try {
     // connect to DB
