@@ -12,35 +12,45 @@ import { Schema, Document, model, models } from "mongoose";
 
 //  1. Create an Answer Interface
 export interface IAnswer extends Document {
-  answer: string;
-  question: Schema.Types.ObjectId;
-  upvotes: number;
-  downvotes: number;
-  createdAt: Date;
   author: Schema.Types.ObjectId;
+  question: Schema.Types.ObjectId;
+  content: string;
+  upvotes: Schema.Types.ObjectId[];
+  downvotes: Schema.Types.ObjectId[];
+  createdAt: Date;
 }
 
 // 2. Create the Answer Schema
 const AnswerSchema = new Schema<IAnswer>({
-  answer: {
+  content: {
     type: String,
+    required: true,
   },
   question: {
     type: Schema.Types.ObjectId,
     ref: "Question",
+    required: true,
   },
-  upvotes: {
-    type: Number,
-  },
-  downvotes: {
-    type: Number,
-  },
+  upvotes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+  downvotes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now(),
   },
   author: {
     type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
   },
 });
 // 3. Create Answer Model
