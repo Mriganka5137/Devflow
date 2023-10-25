@@ -11,7 +11,6 @@ import {
 } from "./shared.types";
 import User from "@/database/user.model";
 import { revalidatePath } from "next/cache";
-import error from "next/error";
 
 // Get all questions
 export async function getQuestions(params: GetQuestionsParams) {
