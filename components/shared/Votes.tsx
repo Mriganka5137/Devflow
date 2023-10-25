@@ -4,6 +4,7 @@ import {
   downvoteQuestion,
   upvoteQuestion,
 } from "@/lib/actions/question.action";
+import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { formatAndDivideNumber } from "@/lib/utils";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -33,7 +34,16 @@ const Votes = ({
   const pathname = usePathname();
   // const router = useRouter();
 
-  const handleSaved = () => {};
+  // Call Saved Server Actions from here
+  const handleSaved = async () => {
+    await toggleSaveQuestion({
+      userId: JSON.parse(userId),
+      questionId: JSON.parse(itemId),
+      path: pathname,
+    });
+  };
+
+  // Call to Vote Server Actions from Client component
   const handleVote = async (action: string) => {
     if (!userId) {
       return;
