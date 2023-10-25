@@ -6,10 +6,10 @@ import {
   CreateUserParams,
   DeleteUserParams,
   GetAllUsersParams,
+  ToggleSaveQuestionParams,
   UpdateUserParams,
 } from "./shared.types";
 import { revalidatePath } from "next/cache";
-import console from "console";
 import Question from "@/database/question.model";
 
 // Get User By Id Server Action
@@ -91,14 +91,6 @@ export async function deleteUser(params: DeleteUserParams) {
 
 // Get all Users
 export async function getAllUsers(params: GetAllUsersParams) {
-  /**
-   GetAllUsersParams { 
-    page?: number;
-    pageSize?: number;
-    filter?: string;
-    searchQuery?: string; // Add searchQuery parameter
-   */
-
   // connect to database
   try {
     connectToDatabase();
@@ -108,5 +100,41 @@ export async function getAllUsers(params: GetAllUsersParams) {
   } catch (error) {
     console.log(error);
     throw error;
+  }
+}
+
+// Save Question
+export async function toggleSaveQuestion(params: ToggleSaveQuestionParams) {
+  try {
+    connectToDatabase();
+    const { userId, questionId, path } = params;
+
+    // 1. Get the user first
+    const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    const isQuestionSaved = user.saved.includes(questionId);
+
+    if (isQuestionSaved) {
+      // Remove the question
+      await User.findByIdAndUpdate(
+        userId,
+        { $pull: { saved: questionId } },
+        { new: true }
+      );
+    } else {
+      // Include the question
+      await User.findByIdAndUpdate(
+        userId,
+        { $addToSet: { saved: questionId } },
+        { new: true }
+      );
+    }
+
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
   }
 }
