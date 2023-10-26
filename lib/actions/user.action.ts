@@ -143,15 +143,6 @@ export async function toggleSaveQuestion(params: ToggleSaveQuestionParams) {
 }
 
 export async function getSavedQuestions(params: GetSavedQuestionsParams) {
-  /*
-    clerkId: string;
-  page?: number;
-  pageSize?: number;
-  filter?: string;
-  searchQuery?: string;
-  
-  */
-
   try {
     await connectToDatabase();
     const { clerkId, page = 1, pageSize = 10, filter, searchQuery } = params;
