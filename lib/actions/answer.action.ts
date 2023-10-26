@@ -13,7 +13,7 @@ import Question from "@/database/question.model";
 export async function createAnswer(params: CreateAnswerParams) {
   try {
     // connect to DB
-    connectToDatabase();
+    await connectToDatabase();
 
     const { content, author, question, path } = params;
     // Create a Answer
@@ -38,7 +38,7 @@ export async function createAnswer(params: CreateAnswerParams) {
 // Get All Answers of a Given Question
 export async function getAnswers(params: GetAnswersParams) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const { questionId } = params;
 
     const answers = await Answer.find({ question: questionId })
@@ -53,7 +53,7 @@ export async function getAnswers(params: GetAnswersParams) {
 //  Upvote Answer
 export async function upvoteAnswer(params: AnswerVoteParams) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const { answerId, userId, hasupVoted, hasdownVoted, path } = params;
 
     // Update Query to pass
@@ -95,7 +95,7 @@ export async function upvoteAnswer(params: AnswerVoteParams) {
 // Down Vote Answer
 export async function downvoteAnswer(params: AnswerVoteParams) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
 
     const { userId, answerId, hasdownVoted, hasupVoted, path } = params;
 

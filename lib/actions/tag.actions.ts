@@ -6,7 +6,7 @@ import Tag from "@/database/tag.model";
 
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const { userId } = params;
 
     // Find the User first
@@ -30,7 +30,7 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
 //  Get all Tags
 export async function getAllTags(params: GetAllTagsParams) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const tags = await Tag.find({});
     if (!tags) {
       throw new Error("No Tags yet");

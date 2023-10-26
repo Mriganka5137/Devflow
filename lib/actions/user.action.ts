@@ -18,7 +18,7 @@ import { FilterQuery } from "mongoose";
 // Get User By Id Server Action
 export async function getUserById(params: any) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const { userId } = params;
     const user = await User.findOne({ clerkId: userId });
 
@@ -32,7 +32,7 @@ export async function getUserById(params: any) {
 // Create User Server Action
 export async function createUser(userData: CreateUserParams) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const newUser = await User.create(userData);
     return newUser;
   } catch (err) {
@@ -44,7 +44,7 @@ export async function createUser(userData: CreateUserParams) {
 // Update User Server Action
 export async function updateUser(params: UpdateUserParams) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const { clerkId, updateData, path } = params;
 
     await User.findOneAndUpdate({ clerkId }, updateData, {
@@ -61,7 +61,7 @@ export async function updateUser(params: UpdateUserParams) {
 // Delete User Server Action
 export async function deleteUser(params: DeleteUserParams) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const { clerkId } = params;
 
     const user = await User.findOneAndDelete({ clerkId });
@@ -96,7 +96,7 @@ export async function deleteUser(params: DeleteUserParams) {
 export async function getAllUsers(params: GetAllUsersParams) {
   // connect to database
   try {
-    connectToDatabase();
+    await connectToDatabase();
     // const { page = 1, pageSize = 20, filter, searchQuery } = params;
     const users = await User.find({}).sort({ createdAt: -1 }); // ----- sort by createdAt in descending order
     return { users };
@@ -109,7 +109,7 @@ export async function getAllUsers(params: GetAllUsersParams) {
 // Save Question
 export async function toggleSaveQuestion(params: ToggleSaveQuestionParams) {
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const { userId, questionId, path } = params;
 
     // 1. Get the user first
@@ -153,7 +153,7 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
   */
 
   try {
-    connectToDatabase();
+    await connectToDatabase();
     const { clerkId, page = 1, pageSize = 10, filter, searchQuery } = params;
 
     const query: FilterQuery<typeof Question> = searchQuery
