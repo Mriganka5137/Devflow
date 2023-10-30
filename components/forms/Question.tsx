@@ -22,7 +22,6 @@ import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { createQuestions } from "@/lib/actions/question.action";
 import { useTheme } from "@/context/ThemeProvider";
-import { useAuth } from "@clerk/nextjs";
 
 interface Props {
   mongoUserId: string;
