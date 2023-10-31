@@ -5,12 +5,16 @@ import { connectToDatabase } from "../mongoose";
 import Tag from "@/database/tag.model";
 import {
   CreateQuestionParams,
+  DeleteQuestionParams,
+  EditQuestionParams,
   GetQuestionByIdParams,
   GetQuestionsParams,
   QuestionVoteParams,
 } from "./shared.types";
 import User from "@/database/user.model";
 import { revalidatePath } from "next/cache";
+import Answer from "@/database/answer.model";
+import Interaction from "@/database/interaction.model";
 
 // Get all questions
 export async function getQuestions(params: GetQuestionsParams) {
@@ -182,12 +186,40 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
   }
 }
 
-// NOTES ---findOneAndUpdate
+// Delete Question
+export async function deleteQuestion(params: DeleteQuestionParams) {
+  try {
+    connectToDatabase();
+    const { questionId, path } = params;
 
-/* This method is used to search for a tag with a specific name.
+    await Question.deleteOne({ _id: questionId });
+    await Answer.deleteMany({ question: questionId });
+    await Interaction.deleteMany({ question: questionId });
+    await Tag.updateMany(
+      { questions: questionId },
+      { $pull: { questions: questionId } }
+    );
 
-{ name: { $regex: new RegExp(^${tag}$, "i") } }: This part of the query is using a regular expression to perform a case-insensitive search for a tag with the given tag name. The ^ symbol denotes the start of the string, and the i flag makes the search case-insensitive.
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-{ $setOnInsert: { name: tag }, $push: { questions: question._id } }: If the tag is found, it will be updated with this operation. If not found (thanks to the upsert: true option), a new tag with the specified tag name will be inserted. This operation also pushes the _id of a question into the questions array of the tag, associating the question with the tag.
+export async function editQuestion(params: EditQuestionParams) {
+  try {
+    connectToDatabase();
+    const { questionId, title, content, path } = params;
 
-{ upsert: true, new: true }: These options indicate that if the tag does not exist (upsert: true), it should be inserted as a new tag, and the new: true option ensures that the method returns the updated (or newly created) tag document. */
+    const question = await Question.findById(questionId).populate("tags");
+
+    if (!question) {
+      throw new Error("Question not found");
+    }
+
+    question.title = title;
+    question.content = content;
+    await question.save();
+    revalidatePath(path);
+  } catch (error) {}
+}
