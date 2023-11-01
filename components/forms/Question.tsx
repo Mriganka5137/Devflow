@@ -36,10 +36,24 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
   const path = usePathname();
   const { mode } = useTheme();
 
-  const parsedQuestionDetails = JSON.parse(questionDetails || "");
-  // console.log(parsedDetails);
+  // const parsedQuestionDetails = JSON.parse(questionDetails || "");
+  let parsedQuestionDetails;
+  let groupedTags;
+  if (questionDetails) {
+    try {
+      parsedQuestionDetails = JSON.parse(questionDetails);
+      groupedTags = parsedQuestionDetails.tags.map((tag) => tag.name);
+    } catch (error) {
+      console.error("Error parsing JSON:", error);
+      // Handle the error in an appropriate way.
+    }
+  } else {
+    // Handle the case where questionDetails is empty (e.g., provide a default value or handle the error in another way).
+    parsedQuestionDetails = {}; // Empty object or any other default value
+  }
 
-  const groupedTags = parsedQuestionDetails.tags.map((tag) => tag.name);
+  console.log(parsedQuestionDetails);
+
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
     defaultValues: {
