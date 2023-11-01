@@ -24,7 +24,7 @@ export async function getUserById(params: any) {
     await connectToDatabase();
     const { userId } = params;
     const user = await User.findOne({ clerkId: userId });
-
+    // console.log(user);
     return user;
   } catch (err) {
     console.log(err);
