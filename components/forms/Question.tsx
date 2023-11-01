@@ -37,7 +37,7 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
   const { mode } = useTheme();
 
   // const parsedQuestionDetails = JSON.parse(questionDetails || "");
-  let parsedQuestionDetails;
+  let parsedQuestionDetails: any;
   let groupedTags;
   if (questionDetails) {
     try {

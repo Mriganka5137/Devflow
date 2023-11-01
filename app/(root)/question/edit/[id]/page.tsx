@@ -12,7 +12,7 @@ const page = async ({ params }: ParamsProps) => {
 
   const mongoUser = await getUserById({ userId });
   const result = await getQuestionByID({ questionId: params.id });
-
+  console.log(result);
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">Edit Question</h1>
