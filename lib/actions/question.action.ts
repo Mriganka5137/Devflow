@@ -223,3 +223,17 @@ export async function editQuestion(params: EditQuestionParams) {
     revalidatePath(path);
   } catch (error) {}
 }
+
+export async function getHotQuestions() {
+  try {
+    connectToDatabase();
+    // Get All questions sorted by upvotes and limit by 6
+
+    const hotQuestions = await Question.find({})
+      .sort({ views: -1, upvotes: -1 })
+      .limit(5);
+    return hotQuestions;
+  } catch (error) {
+    console.log(error);
+  }
+}

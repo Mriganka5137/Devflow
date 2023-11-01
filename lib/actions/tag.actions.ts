@@ -9,6 +9,8 @@ import {
 import Tag, { ITag } from "@/database/tag.model";
 import Question from "@/database/question.model";
 import { FilterQuery } from "mongoose";
+import error from "next/error";
+import { questions, tags } from "@/constants";
 
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
   try {
@@ -80,5 +82,33 @@ export async function getQuestionsByTagId(params: GetQuestionsByTagIdParams) {
   } catch (error) {
     console.log(error);
     throw error;
+  }
+}
+
+export async function getPopularTags() {
+  try {
+    connectToDatabase();
+    // const popularTags = await Tag.find({}).sort({ questions: -1 }).limit(5);
+
+    const popularTags = await Tag.aggregate([
+      {
+        $project: {
+          name: 1,
+          _id: 1,
+          questions: {
+            $size: "$questions",
+          },
+        },
+      },
+      {
+        $sort: { questions: -1 },
+      },
+      { $limit: 5 },
+    ]);
+
+    // console.log(popularTags);
+    return popularTags;
+  } catch (error) {
+    console.log(error);
   }
 }
