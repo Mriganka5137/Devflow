@@ -75,7 +75,7 @@ const ProfileEdit = ({ mongoUser, clerkId }: Props) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
+              <FormLabel className=" text-dark400_light800">
                 Name <span className=" text-primary-500">*</span>{" "}
               </FormLabel>
               <FormControl>
@@ -94,7 +94,7 @@ const ProfileEdit = ({ mongoUser, clerkId }: Props) => {
           name="username"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
+              <FormLabel className=" text-dark400_light800">
                 Username <span className=" text-primary-500">*</span>{" "}
               </FormLabel>
               <FormControl>
@@ -113,7 +113,9 @@ const ProfileEdit = ({ mongoUser, clerkId }: Props) => {
           name="portfolioLink"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Portfolio Link</FormLabel>
+              <FormLabel className=" text-dark400_light800">
+                Portfolio Link
+              </FormLabel>
               <FormControl>
                 <Input
                   type="url"
@@ -131,7 +133,7 @@ const ProfileEdit = ({ mongoUser, clerkId }: Props) => {
           name="location"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Location</FormLabel>
+              <FormLabel className=" text-dark400_light800">Location</FormLabel>
               <FormControl>
                 <Input
                   placeholder="Where do you live?"
@@ -148,7 +150,7 @@ const ProfileEdit = ({ mongoUser, clerkId }: Props) => {
           name="bio"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>
+              <FormLabel className=" text-dark400_light800">
                 Bio <span className=" text-primary-500">*</span>{" "}
               </FormLabel>
               <FormControl>
