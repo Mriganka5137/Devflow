@@ -52,8 +52,6 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
     parsedQuestionDetails = {}; // Empty object or any other default value
   }
 
-  console.log(parsedQuestionDetails);
-
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
     defaultValues: {
@@ -133,7 +131,7 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
       setIsSubmitting(false);
     }
 
-    console.log(values);
+    // console.log(values);
   }
   return (
     <Form {...form}>
