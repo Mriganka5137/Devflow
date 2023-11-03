@@ -25,7 +25,7 @@ export default async function Collection({ searchParams }: SearchParamsProps) {
       {/* SEARCHBARS */}
       <div className="mt-11 flex justify-between gap-2  max-md:flex-row max-sm:flex-col max-sm:justify-evenly sm:items-start">
         <LocalSearchbar
-          route="/"
+          route="/collection"
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
           placeholder="Search questions"

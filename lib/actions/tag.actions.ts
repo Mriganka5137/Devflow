@@ -38,8 +38,19 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
 //  Get all Tags
 export async function getAllTags(params: GetAllTagsParams) {
   try {
-    await connectToDatabase();
-    const tags = await Tag.find({});
+    connectToDatabase();
+    const { searchQuery } = params;
+
+    const query: FilterQuery<typeof Tag> = {};
+    if (searchQuery) {
+      query.$or = [
+        {
+          name: { $regex: new RegExp(searchQuery, "i") },
+        },
+      ];
+    }
+
+    const tags = await Tag.find(query);
     if (!tags) {
       throw new Error("No Tags yet");
     }
