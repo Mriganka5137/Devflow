@@ -8,7 +8,10 @@ import Link from "next/link";
 import React from "react";
 
 const Community = async ({ searchParams }: SearchParamsProps) => {
-  const results = await getAllTags({ searchQuery: searchParams.q });
+  const results = await getAllTags({
+    searchQuery: searchParams.q,
+    filter: searchParams.filter,
+  });
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">Tags</h1>
@@ -20,6 +23,7 @@ const Community = async ({ searchParams }: SearchParamsProps) => {
           placeholder="Search by tag name..."
         />
 
+        {/* POPULAR FILTER IS NOT WORKING */}
         <Filter
           filters={TagFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"

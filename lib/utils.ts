@@ -7,6 +7,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const getTimestamp = (createdAt: Date): string => {
+  // console.log(createdAt);
+  // NEEDS fixing
   const now = new Date();
   const timeDifference = now.getTime() - createdAt.getTime();
 
@@ -20,6 +22,7 @@ export const getTimestamp = (createdAt: Date): string => {
 
   if (timeDifference < minute) {
     const seconds = Math.floor(timeDifference / 1000);
+    // console.log(`${seconds} ${seconds === 1 ? "second" : "seconds"} ago`);
     return `${seconds} ${seconds === 1 ? "second" : "seconds"} ago`;
   } else if (timeDifference < hour) {
     const minutes = Math.floor(timeDifference / minute);

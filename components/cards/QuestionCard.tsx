@@ -71,7 +71,7 @@ const QuestionCard = ({
           imgUrl={author.picture}
           alt="user"
           value={author.name}
-          title=" - asked 1 hour ago" // -----> TODO: Add time ago
+          title={` - ${getTimestamp(createdAt)}`}
           textStyles="small-medium text-dark400_light800"
           href={`/profile/${author._id}`}
           isAuthor

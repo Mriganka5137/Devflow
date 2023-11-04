@@ -45,7 +45,7 @@ const AnswerSchema = new Schema<IAnswer>({
   ],
   createdAt: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
   author: {
     type: Schema.Types.ObjectId,

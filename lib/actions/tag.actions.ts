@@ -9,8 +9,6 @@ import {
 import Tag, { ITag } from "@/database/tag.model";
 import Question from "@/database/question.model";
 import { FilterQuery } from "mongoose";
-import error from "next/error";
-import { questions, tags } from "@/constants";
 
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
   try {
@@ -39,7 +37,7 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
 export async function getAllTags(params: GetAllTagsParams) {
   try {
     connectToDatabase();
-    const { searchQuery } = params;
+    const { searchQuery, filter } = params;
 
     const query: FilterQuery<typeof Tag> = {};
     if (searchQuery) {
@@ -50,7 +48,28 @@ export async function getAllTags(params: GetAllTagsParams) {
       ];
     }
 
-    const tags = await Tag.find(query);
+    let sortOptions = {};
+
+    switch (filter) {
+      case "old":
+        sortOptions = { createdAt: 1 };
+        break;
+      case "popular":
+        sortOptions = { questions: -1 };
+        break;
+      case "recent":
+        sortOptions = { createdAt: -1 };
+        break;
+      case "name":
+        sortOptions = { name: 1 };
+        break;
+
+      default:
+        sortOptions = { name: 1 };
+        break;
+    }
+
+    const tags = await Tag.find(query).sort(sortOptions);
     if (!tags) {
       throw new Error("No Tags yet");
     }
@@ -64,7 +83,7 @@ export async function getAllTags(params: GetAllTagsParams) {
 export async function getQuestionsByTagId(params: GetQuestionsByTagIdParams) {
   try {
     await connectToDatabase();
-    const { tagId, page = 1, pageSize = 10, filter, searchQuery } = params;
+    const { tagId, filter, searchQuery } = params;
 
     const tagFilter: FilterQuery<ITag> = { _id: tagId };
 

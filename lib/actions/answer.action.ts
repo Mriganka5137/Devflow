@@ -10,9 +10,7 @@ import {
 } from "./shared.types";
 import Answer from "@/database/answer.model";
 import Question from "@/database/question.model";
-import error from "next/error";
 import Interaction from "@/database/interaction.model";
-import { Tag } from "lucide-react";
 
 // Create Question Action
 export async function createAnswer(params: CreateAnswerParams) {
@@ -44,11 +42,31 @@ export async function createAnswer(params: CreateAnswerParams) {
 export async function getAnswers(params: GetAnswersParams) {
   try {
     await connectToDatabase();
-    const { questionId } = params;
+    const { questionId, sortBy } = params;
+
+    let sortOptions = {};
+
+    switch (sortBy) {
+      case "old":
+        sortOptions = { createdAt: 1 };
+        break;
+      case "recent":
+        sortOptions = { createdAt: -1 };
+        break;
+      case "lowestUpvotes":
+        sortOptions = { upvotes: 1 };
+        break;
+      case "highestUpvotes":
+        sortOptions = { upvotes: -1 };
+        break;
+
+      default:
+        break;
+    }
 
     const answers = await Answer.find({ question: questionId })
       .populate("author", "_id clerkId name picture")
-      .sort({ createdAt: -1 });
+      .sort(sortOptions);
 
     return { answers };
   } catch (error) {
