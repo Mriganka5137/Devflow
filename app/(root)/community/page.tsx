@@ -9,8 +9,9 @@ import React from "react";
 
 const Community = async ({ searchParams }: SearchParamsProps) => {
   const searchQuery = searchParams.q;
+  const filter = searchParams.filter;
 
-  const results = await getAllUsers({ searchQuery });
+  const results = await getAllUsers({ searchQuery, filter });
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">All Users</h1>

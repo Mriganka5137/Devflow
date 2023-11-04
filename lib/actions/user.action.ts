@@ -101,7 +101,7 @@ export async function getAllUsers(params: GetAllUsersParams) {
   try {
     await connectToDatabase();
     // const { page = 1, pageSize = 20, filter, searchQuery } = params;
-    const { searchQuery } = params;
+    const { searchQuery, filter } = params;
     const query: FilterQuery<typeof User> = {};
 
     if (searchQuery) {
@@ -109,6 +109,23 @@ export async function getAllUsers(params: GetAllUsersParams) {
         { name: { $regex: new RegExp(searchQuery, "i") } },
         { username: { $regex: new RegExp(searchQuery, "i") } },
       ];
+    }
+
+    let sortOptions = {};
+
+    switch (filter) {
+      case "new_users":
+        sortOptions = { joinedAt: -1 };
+        break;
+      case "old_users":
+        sortOptions = { joinedAt: 1 };
+        break;
+      case "top_contributers":
+        sortOptions = { reputation: -1 };
+        break;
+
+      default:
+        break;
     }
 
     const users = await User.find(query).sort({ createdAt: -1 }); // ----- sort by createdAt in descending order
