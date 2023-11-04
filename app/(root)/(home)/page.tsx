@@ -10,13 +10,12 @@ import { getQuestions } from "@/lib/actions/question.action";
 import { SearchParamsProps } from "@/types";
 
 export default async function Home({ searchParams }: SearchParamsProps) {
-  // Get the Questions from DB
   let result;
-
   try {
     // Get the Questions from DB
     result = await getQuestions({
       searchQuery: searchParams.q,
+      filter: searchParams.filter,
     });
   } catch (error) {
     // Handle any errors that occur during the data fetching
