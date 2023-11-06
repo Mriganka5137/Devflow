@@ -1,5 +1,6 @@
 import Filter from "@/components/shared/Filter";
 import NoResults from "@/components/shared/NoResults";
+import Pagination from "@/components/shared/Pagination";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { TagFilters } from "@/constants/filters";
 import { getAllTags } from "@/lib/actions/tag.actions";
@@ -7,10 +8,11 @@ import { SearchParamsProps } from "@/types";
 import Link from "next/link";
 import React from "react";
 
-const Community = async ({ searchParams }: SearchParamsProps) => {
+const Tag = async ({ searchParams }: SearchParamsProps) => {
   const results = await getAllTags({
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   });
   return (
     <>
@@ -62,8 +64,15 @@ const Community = async ({ searchParams }: SearchParamsProps) => {
           />
         )}
       </section>
+
+      <div className=" mt-10">
+        <Pagination
+          isNext={results?.isNext}
+          pageNumber={searchParams.page ? +searchParams.page : 1}
+        />
+      </div>
     </>
   );
 };
 
-export default Community;
+export default Tag;
