@@ -22,7 +22,11 @@ export async function getQuestions(params: GetQuestionsParams) {
   try {
     // Connect to DB
     await connectToDatabase();
-    const { searchQuery, filter } = params;
+    const { searchQuery, filter, page = 1, pageSize = 2 } = params;
+
+    // Calculate the number of questions to skip  based on page number and page size
+
+    const skipAmount = (page - 1) * pageSize;
 
     const query: FilterQuery<typeof Question> = {};
     if (searchQuery) {
@@ -51,7 +55,6 @@ export async function getQuestions(params: GetQuestionsParams) {
     }
 
     const questions = await Question.find(query)
-      .sort(sortOptions)
       .populate({
         path: "tags",
         model: Tag,
@@ -59,9 +62,15 @@ export async function getQuestions(params: GetQuestionsParams) {
       .populate({
         path: "author",
         model: User,
-      });
+      })
+      .skip(skipAmount)
+      .limit(pageSize)
+      .sort(sortOptions);
 
-    return { questions };
+    const totalQuestions = await Question.countDocuments(query);
+    const isNext = totalQuestions > skipAmount + questions.length;
+
+    return { questions, isNext };
   } catch (error) {
     console.log(error);
   }
