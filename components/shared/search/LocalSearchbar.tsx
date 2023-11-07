@@ -27,9 +27,6 @@ const LocalSearchbar = ({
 
   const [search, setSearch] = useState(query || "");
 
-  // console.log(
-  //   ` pathname: ${pathname}, searchParams:  ${searchParams}, query:  ${query}, search: ${search}`
-  // );
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       if (search) {
