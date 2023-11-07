@@ -63,8 +63,8 @@ export const formatAndDivideNumber = (num: number): string => {
 };
 
 export const getJoinedMonthYear = (date: Date): string => {
-  const month = date.toLocaleString("default", { month: "long" });
-  const year = date.getFullYear();
+  const month = date?.toLocaleString("default", { month: "long" });
+  const year = date?.getFullYear();
   return `${month} ${year}`;
 };
 
