@@ -17,7 +17,6 @@ import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
 import { FilterQuery } from "mongoose";
 import Answer from "@/database/answer.model";
-import { questions } from "@/constants";
 
 // Get User By Id Server Action
 export async function getUserById(params: any) {
@@ -134,7 +133,7 @@ export async function getAllUsers(params: GetAllUsersParams) {
     const users = await User.find(query)
       .skip(skipAmount)
       .limit(pageSize)
-      .sort(sortOptions); // ----- sort by createdAt in descending order
+      .sort(sortOptions); // ----- sort by createdAt in descending
 
     const totalUsers = await User.countDocuments(query);
     const isNext = totalUsers > skipAmount + users.length;
