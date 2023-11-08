@@ -82,7 +82,7 @@ const ProfileEdit = ({ mongoUser, clerkId }: Props) => {
                 <Input
                   placeholder="Name..."
                   {...field}
-                  className=" no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  className=" no-focus paragraph-regular light-border-2 background-light800_dark300 text-dark300_light700 min-h-[56px] border"
                 />
               </FormControl>
               <FormMessage />
@@ -101,7 +101,7 @@ const ProfileEdit = ({ mongoUser, clerkId }: Props) => {
                 <Input
                   placeholder="Username..."
                   {...field}
-                  className=" no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  className=" no-focus paragraph-regular light-border-2 background-light800_dark300 text-dark300_light700 min-h-[56px] border"
                 />
               </FormControl>
               <FormMessage />
@@ -121,7 +121,7 @@ const ProfileEdit = ({ mongoUser, clerkId }: Props) => {
                   type="url"
                   placeholder="Your Portfolio Link"
                   {...field}
-                  className=" no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  className=" no-focus paragraph-regular light-border-2 background-light800_dark300 text-dark300_light700 min-h-[56px] border"
                 />
               </FormControl>
               <FormMessage />
@@ -138,7 +138,7 @@ const ProfileEdit = ({ mongoUser, clerkId }: Props) => {
                 <Input
                   placeholder="Where do you live?"
                   {...field}
-                  className=" no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  className=" no-focus paragraph-regular light-border-2 background-light800_dark300 text-dark300_light700 min-h-[56px] border"
                 />
               </FormControl>
               <FormMessage />
@@ -157,7 +157,7 @@ const ProfileEdit = ({ mongoUser, clerkId }: Props) => {
                 <Textarea
                   placeholder="What's special about you?"
                   {...field}
-                  className=" no-focus paragraph-regular light-border-2 background-light700_dark300 text-dark300_light700 min-h-[56px] border"
+                  className=" no-focus paragraph-regular light-border-2 background-light800_dark300 text-dark300_light700 min-h-[56px] border"
                 />
               </FormControl>
               <FormMessage />

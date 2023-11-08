@@ -21,9 +21,9 @@ const StatsCard = ({ imgUrl, title, value }: StatsCardProps) => {
 };
 
 interface Props {
-  totalQuestions: number;
-  totalAnswers: number;
-  badges: BadgeCounts;
+  totalQuestions: number | undefined;
+  totalAnswers: number | undefined;
+  badges: BadgeCounts | undefined;
   reputation: number;
 }
 
@@ -51,16 +51,16 @@ const Stats = ({ totalQuestions, totalAnswers, badges, reputation }: Props) => {
         <StatsCard
           imgUrl="/assets/icons/gold-medal.svg"
           title="Gold Badges"
-          value={badges.GOLD}
+          value={badges?.GOLD}
         />
         <StatsCard
           imgUrl="/assets/icons/silver-medal.svg"
-          value={badges.SILVER}
+          value={badges?.SILVER}
           title="Silver Badges"
         />
         <StatsCard
           imgUrl="/assets/icons/bronze-medal.svg"
-          value={badges.BRONZE}
+          value={badges?.BRONZE}
           title="Bronze Badges"
         />
       </div>
