@@ -37,13 +37,13 @@ const Stats = ({ totalQuestions, totalAnswers, badges, reputation }: Props) => {
         <div className=" light-border background-light900_dark300 flex flex-wrap items-center justify-start gap-4 rounded-md p-6 shadow-light-300 dark:shadow-dark-200">
           <div>
             <p className="paragraph-semibold text-dark200_light900">
-              {formatAndDivideNumber(totalQuestions)}
+              {totalQuestions && formatAndDivideNumber(totalQuestions)}
             </p>
             <p className="body-medium text-dark400_light700">Questions</p>
           </div>
           <div>
             <p className="paragraph-semibold text-dark200_light900">
-              {formatAndDivideNumber(totalAnswers)}
+              {totalAnswers && formatAndDivideNumber(totalAnswers)}
             </p>
             <p className="body-medium text-dark400_light700">Answers</p>
           </div>
