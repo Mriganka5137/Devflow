@@ -11,15 +11,6 @@ import {
 import { formUrlQuery } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 
-/*
-    md: 768px  breakpoint
-    on > md: 769px --> show badge
-    on < md: 768px --> show filter
-    max-md:hidden --> hide badge
-    max-md:block --> show filter
-
-*/
-
 interface Props {
   filters: {
     name: string;

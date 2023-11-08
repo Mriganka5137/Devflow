@@ -331,6 +331,7 @@ export async function getUserInfo(params: GetUserByIdParams) {
     };
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 
@@ -358,5 +359,6 @@ export async function getUserQuestions(params: GetUserStatsParams) {
     return { totalQuestions, questions: userQuestions, isNext };
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }

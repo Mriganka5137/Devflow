@@ -40,7 +40,7 @@ const UserCard = async ({ user }: Props) => {
             @{user.username}
           </p>
         </div>
-        <div className="mt-4">
+        <div className="mt-5">
           {interactedTags.length > 0 ? (
             <div className="flex items-center gap-2">
               {interactedTags.map((tag) => (

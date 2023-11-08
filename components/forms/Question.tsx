@@ -22,7 +22,6 @@ import { Badge } from "../ui/badge";
 import Image from "next/image";
 import { createQuestions, editQuestion } from "@/lib/actions/question.action";
 import { useTheme } from "@/context/ThemeProvider";
-import { toast } from "../ui/use-toast";
 
 interface Props {
   mongoUserId: string;
@@ -43,7 +42,7 @@ const Question = ({ mongoUserId, type, questionDetails }: Props) => {
   if (questionDetails) {
     try {
       parsedQuestionDetails = JSON.parse(questionDetails);
-      groupedTags = parsedQuestionDetails.tags.map((tag) => tag.name);
+      groupedTags = parsedQuestionDetails.tags.map((tag: any) => tag.name);
     } catch (error) {
       console.error("Error parsing JSON:", error);
       // Handle the error in an appropriate way.

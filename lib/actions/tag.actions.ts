@@ -30,6 +30,7 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
     ];
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 
@@ -86,6 +87,7 @@ export async function getAllTags(params: GetAllTagsParams) {
     return { tags, isNext };
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 
