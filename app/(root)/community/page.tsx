@@ -14,6 +14,7 @@ const Community = async ({ searchParams }: SearchParamsProps) => {
   const page = searchParams.page ? +searchParams.page : 1;
 
   const results = await getAllUsers({ searchQuery, filter, page });
+
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">All Users</h1>
